@@ -1,7 +1,10 @@
 const imageElem=document.querySelector('#image')
 const checkButton = document.querySelector('#check-button');
+const result=document.querySelector('#result')
+const attempts=document.querySelector('#attempts')
+const startContainer=document.querySelector('#startContainer')
+const checkContainer=document.querySelector('#checkContainer')
 
-    
 let answerContainer=document.querySelector('#answerContainer')
 const text=[
 document.querySelector('#A'),
@@ -34,6 +37,8 @@ document.querySelector('#Z'),
 
 let inputBoxes=[]
 let randomImage;
+let attemptArr= [1,2,3,4,5,6,7,8,9,10]
+
 
 function updateImage(){
     const items=['shoes','rainbow','pants','tshirt','car','bed','pillow','apple','banana','orange']
@@ -41,7 +46,8 @@ function updateImage(){
     randomImage= items[randomNum]
     imageElem.classList.remove('shoes','rainbow','pants','tshirt','car','bed','pillow','apple','banana','orange')
     imageElem.classList.add(randomImage)
-    console.log(randomImage)
+    attempts.innerHTML= `Attempts left: ${attemptArr.length}`
+    result.innerHTML=''
     addInputBox(randomImage)
 }
 
@@ -83,17 +89,41 @@ function checkAnswer(userInput, correctAnswer) {
     return userInput === correctAnswer;
 }
 
+function answerBox(inputBox){
+    return inputBox.value
+}
+
+let attempt=10
 
 function checkAnswerValidity(){
-    const userInput = inputBoxes.map(inputBox => inputBox.value).join('');
+    console.log(inputBoxes)
+    const userInput = inputBoxes.map(answerBox).join('');
     const correctAnswer = randomImage;
     let isCorrect = checkAnswer(userInput.toLowerCase(), correctAnswer.toLowerCase())
     if(isCorrect){
-        console.log("correct")
+        result.innerHTML= 'Well done, you are correct!'
     }
     else{
-        console.log("incorrect")
+        result.innerHTML= 'Oops, wrong answer! <br> Please try again!'
+        attempt=attempt-1 
+        attemptArr.pop()
+        attempts.innerHTML=`Attempts left: ${attemptArr.length}`
+        console.log(attempt)
+        checkAttempt(attempt)       
     }
 }
 
-updateImage()
+function checkAttempt(attempt){
+    console.log(attempt)
+    if (attempt<=0){
+        result.innerHTML= 'You lose. 10 attempt has <br> been used. <br> Click back button to play again!'
+
+        startContainer.innerHTML=''
+        checkContainer.innerHTML=''
+    }   
+    return
+
+}
+
+
+

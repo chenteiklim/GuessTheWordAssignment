@@ -2,7 +2,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 800px;
+    height: 700px;
     flex-direction: column;
 }
 
@@ -13,6 +13,10 @@ body{
     height: 800px;
     width: 1000px;
     background-image: linear-gradient(darkblue,lightblue);
+}
+
+#back{
+    width: 55px;
 }
 
 #textContainer{
@@ -132,6 +136,23 @@ body{
     text-align: center;
     background-color: aliceblue;
     margin: 0px;
+}
+
+#result{
+    text-align: center;
+    font-size: 30px;
+    background: linear-gradient(to left,
+    violet,
+    #CF9FFF,
+    lightblue,
+    lightgreen,
+    #FFD580,
+    #FAD5A5,
+    #FFCCCB);
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .text:hover {
@@ -267,4 +288,12 @@ input[type=text] {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+
+#check-button{
+    margin-top: 20px;
+}
+
+#attempts{
+    color: wheat;
 }
